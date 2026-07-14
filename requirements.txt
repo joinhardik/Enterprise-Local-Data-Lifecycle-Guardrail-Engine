@@ -1,0 +1,15 @@
+# Core Validation & Data Schemas
+pydantic>=2.6.0,<3.0.0
+
+# Data Version Control & DAG Pipelines
+dvc>=3.40.0,<4.0.0
+
+# Configuration Ledger Parsing
+pyyaml>=6.0.1,<7.0.0
+
+# Quality Assurance & Testing Framework
+pytest>=8.0.0,<9.0.0
+
+# Strict Type Checking
+mypy>=1.8.0,<2.0.0
+types-PyYAML>=6.0.12
