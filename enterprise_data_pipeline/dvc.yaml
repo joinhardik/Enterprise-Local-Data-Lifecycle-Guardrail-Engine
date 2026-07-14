@@ -1,0 +1,42 @@
+stages:
+  ingest:
+    cmd: python3 -m src.ingest
+    deps:
+      - src/ingest.py
+      - src/schemas.py
+    params:
+      - ingest.raw_sample_count
+      - ingest.source_channel
+    outs:
+      - data/raw/ingested_chunks.json
+
+  validate:
+    cmd: python3 -m src.validate
+    deps:
+      - src/validate.py
+      - src/schemas.py
+      - data/raw/ingested_chunks.json
+    params:
+      - validate.min_text_length
+    outs:
+      - data/processed/validation_passed.flag
+
+  embed:
+    cmd: python3 -m src.embed
+    deps:
+      - src/embed.py
+      - src/schemas.py
+      - data/processed/validation_passed.flag
+    params:
+      - embed.embedding_dim
+      - embed.batch_size
+      - embed.learning_rate
+      - embed.epochs
+    outs:
+      - data/processed/vector_features.json
+    metrics:
+      - metrics/eval.json:
+          cache: false
+    plots:
+      - metrics/loss_curve.csv:
+          cache: false

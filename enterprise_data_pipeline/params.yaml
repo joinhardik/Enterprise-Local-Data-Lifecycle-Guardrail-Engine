@@ -1,0 +1,15 @@
+ingest:
+  raw_sample_count: 100
+  source_channel: "compliance_audit_stream"
+
+validate:
+  min_text_length: 10
+  allowed_codecs:
+    - "utf-8"
+    - "ascii"
+
+embed:
+  embedding_dim: 768
+  batch_size: 32
+  learning_rate: 0.0003
+  epochs: 5
